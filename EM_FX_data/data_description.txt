@@ -15,12 +15,43 @@ MOV_AVG_200D: 200-day moving average
 MOV_AVG_50D: 50-day moving average
 
 
+Steps:
 
-*** Derived fields (EM_FX_data.xlsx) ***
+1. Impute by duplication with historical data for all feature fields daily to match the spot FX rate
+2. Create lagged features
+3. Create derived features
+4. Create dataframe with columns of equal length, i.e. remove older rows if other features don't have data for those dates
+
+
+*** Lagged features ***
+
+For Short-Term Model:
+5-day lag for Current_account
+5-day lag for Trade_balance
+5-day lag for Implied_rate
+5-day lag for REER
+5-day lag for MOV_AVG_200D
+5-day lag for MOV_AVG_5D
+
+For Long-Term Model:
+21-day lag for Current_account
+21-day lag for Trade_balance
+21-day lag for Implied_rate
+21-day lag for REER
+21-day lag for MOV_AVG_200D
+21-day lag for MOV_AVG_5D
+
+
+*** Derived target variable (also in EM_FX_data.xlsx) ***
 
 BRL_1m_return=BRL_spot_FX_rate from 21 previous days ago/current BRL_spot_FX_rate - 1 
+*this will be the target variable for Long-Term Model(timing of entry into trading position)
 
 BRL_5d_return=BRL_spot_FX_rate from 5 previous days ago/current BRL_spot_FX_rate - 1 
+*this will be the target variable for Short-Term Model(security selection)
+
+
+*** Derived features (also in EM_FX_data.xlsx) ***
 
 3m_change_in_TB=(current Trade_balance - Trade_balance from 3 months ago)/Trade_balance from 3 months ago
 
@@ -31,3 +62,8 @@ BRL_5d_return=BRL_spot_FX_rate from 5 previous days ago/current BRL_spot_FX_rate
 Momentum:
 1 if MOV_AVG_50D<MOV_AVG_200D
 0 otherwise
+
+
+
+
+
