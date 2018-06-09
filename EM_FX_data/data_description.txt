@@ -1,0 +1,33 @@
+*** Original field s***
+
+BRL_spot_FX_rate: Brazillian real per 1 US dollar exchange rate
+
+Current_account: Current account as a % of GDP
+
+Trade_balance: Trade balance in million US dollars
+
+Implied_rate: Local interest rate implied from 3-month FX forward contract
+
+REER: Real effective exchange rate 
+
+MOV_AVG_200D: 200-day moving average
+
+MOV_AVG_50D: 50-day moving average
+
+
+
+*** Derived fields (EM_FX_data.xlsx) ***
+
+BRL_1m_return=BRL_spot_FX_rate from 21 previous days ago/current BRL_spot_FX_rate - 1 
+
+BRL_5d_return=BRL_spot_FX_rate from 5 previous days ago/current BRL_spot_FX_rate - 1 
+
+3m_change_in_TB=(current Trade_balance - Trade_balance from 3 months ago)/Trade_balance from 3 months ago
+
+6m_change_in_TB=(current Trade_balance - Trade_balance from 6 months ago)/Trade_balance from 3 months ago
+
+5yr_REER_discount=(current REER - average REER for previous 5 years)/average REER for previous 5 years
+
+Momentum:
+1 if MOV_AVG_50D<MOV_AVG_200D
+0 otherwise
