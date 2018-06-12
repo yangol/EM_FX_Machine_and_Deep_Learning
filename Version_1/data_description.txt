@@ -1,4 +1,4 @@
-*** Original field s***
+*** Original fields***
 
 BRL_spot_FX_rate: Brazillian real per 1 US dollar exchange rate
 
